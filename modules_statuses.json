@@ -1,0 +1,8 @@
+{
+    "Auth": true,
+    "Page": true,
+    "CMS": true,
+    "Admin": true,
+    "Course": true,
+    "Settings": true
+}

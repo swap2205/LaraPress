@@ -1,0 +1,19 @@
+{
+    "name": "swap2205/laratable",
+    "description": "A CRUD operation package to ease your day-to-day development for the admin panel",
+    "authors": [
+        {
+            "name": "Swapnil",
+            "email": "swap2205@gmail.com"
+        }
+    ],
+	"type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Swap2205\\Laratable\\": "src/"
+        }
+    },
+    "require": {}
+}

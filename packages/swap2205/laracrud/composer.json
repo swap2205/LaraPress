@@ -1,0 +1,25 @@
+{
+    "name": "swap2205/laracrud",
+    "description": "LaraCRUD package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Swapnil Mahajan",
+            "email": "swap2205@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+	"autoload":{
+		"psr-4": {
+			"Swap2205\\LaraCRUD\\":"src/"
+		}
+	},
+	"extra": {
+		"laravel":{
+			"providers":[
+				"Swap2205\\LaraCRUD\\LaraCRUDServiceProvider"
+			]
+		}
+	}
+}
