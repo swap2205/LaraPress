@@ -47,10 +47,10 @@
         white-space: nowrap;
         overflow: hidden;
         border: 1px solid #aaa;
-        background: #ddd;
-        background: -webkit-linear-gradient(top, #ddd 0%, #bbb 100%);
-        background: -moz-linear-gradient(top, #ddd 0%, #bbb 100%);
-        background: linear-gradient(top, #ddd 0%, #bbb 100%);
+        background: #2ea8e5;
+        background: -webkit-linear-gradient(top, #2ea8e5 0%, #9ed8f5 100%);;
+        background: -moz-linear-gradient(top, #2ea8e5 0%, #9ed8f5 100%);;
+        background: linear-gradient(top, #2ea8e5 0%, #9ed8f5 100%);;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }

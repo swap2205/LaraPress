@@ -3,9 +3,7 @@ var list_id = 1;
 
 
 $(document).ready(()=>{
-    var json = '[{"id":1},{"id":2},{"id":3,"children":[{"id":4},{"id":5,"foo":"bar"}]}]';
-    var options = {'json': json}
-    $('.dd').nestable({ /* config options */ });
+    $('.dd').nestable({ "maxDepth" : 2 });
 
 
     // Toggle plus minus icon on show hide of collapse element

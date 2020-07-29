@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Settings\Http\Controllers\SettingsController;
+
 $serializer = new SuperClosure\Serializer;
 
 return array(
@@ -21,19 +23,19 @@ return array(
 	| Theme Default
 	|--------------------------------------------------------------------------
 	|
-	| If you don't set a theme when using a "Theme" class 
+	| If you don't set a theme when using a "Theme" class
 	| the default theme will replace automatically.
 	|
 	*/
 
-	'themeDefault' => env('APP_THEME', 'default'),
+	'themeDefault' => env('APP_THEME', 'arsha'),//get_value('app_theme'),
 
 	/*
 	|--------------------------------------------------------------------------
 	| Layout Default
 	|--------------------------------------------------------------------------
 	|
-	| If you don't set a layout when using a "Theme" class 
+	| If you don't set a layout when using a "Theme" class
 	| the default layout will replace automatically.
 	|
 	*/
