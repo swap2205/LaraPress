@@ -1,6 +1,6 @@
 <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>Admin</b>LTE</a>
+      <a href="{{url('/')}}"><b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -9,7 +9,7 @@
         @error('pass')
             <p class="help-block">{{$message}}</p>
         @enderror
-        <form action="/admin/login" method="post">
+        <form action="{{url('admin/login')}}" method="post">
             @csrf
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email" required maxlength="100" name="email">

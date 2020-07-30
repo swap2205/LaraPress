@@ -19,7 +19,7 @@ document.addEventListener(
             processing: true,
             serverSide: true,
             ajax: {
-                url: dataTable_url,
+                url: base_url+dataTable_url,
                 dataType: "json",
                 type: "POST",
                 data: function (d) {
@@ -81,7 +81,7 @@ function crud_edit(id) {
     submit_url += "/" + id;
     // ajax adding data to database
     $.ajax({
-        url: submit_url,
+        url: base_url+submit_url,
         type: "GET",
         // data: formData,
         // contentType: false,
@@ -118,7 +118,7 @@ function crud_view(id) {
     submit_url += "/view/" + id;
     // ajax adding data to database
     $.ajax({
-        url: submit_url,
+        url: base_url+submit_url,
         type: "GET",
         // data: formData,
         // contentType: false,
@@ -159,7 +159,7 @@ function crud_save() {
     var formData = new FormData($("#add_edit_form")[0]);
     // ajax adding data to database
     $.ajax({
-        url: submit_url,
+        url: base_url+submit_url,
         type: method_type,
         data: formData,
         contentType: false,

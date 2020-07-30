@@ -55,6 +55,8 @@ return array(
 				$asset->themePath()->add('summernote', 'plugins/summernote/summernote-bs4.css');
 				$asset->themePath()->add('summernote-js', 'plugins/summernote/summernote-bs4.min.js');
 			});
+            // Writing an in-line script, to add base_url on all pages.
+			$asset->writeScript('custom-inline-script', 'var base_url = "'.url('/').'"', []);
 
 			$asset->add('core-font', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700.css');
 			$asset->add('core-style1', 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');

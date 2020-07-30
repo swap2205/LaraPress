@@ -13,7 +13,7 @@
 
 use Nwidart\Modules\Facades\Module;
 
-Route::get('/', 'CMSController@home');
+Route::get('/', 'HomeController@home');
 
 Route::prefix('admin/cms')->group(function() {
     Route::get('/list/{type?}', 'CMSController@list')->middleware('auth:admin');
@@ -39,6 +39,6 @@ if(empty(request()->segment(2))){
     //condition to check if the route does not belong to any module
     if(!in_array(request()->segment(1),Module::all())){
         // Route::get('/{course:slug}', 'PageController@course');
-        Route::get('/{page:slug}', 'CMSController@index');
+        Route::get('/{page:slug}', 'HomeController@index');
     }
 }

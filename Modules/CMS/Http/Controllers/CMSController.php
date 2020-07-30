@@ -32,19 +32,7 @@ class CMSController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index(Page $page)
-    {
-        Theme::uses('arsha');
-        Theme::setTitle($page->title);
-        return Theme::view('cms::frontend.page', $page);
-    }
 
-    public function home()
-    {
-        Theme::uses('arsha');
-        Theme::setTitle('Swapnil | Home')->set('IsHome',true);
-        return Theme::view('cms::frontend.index');
-    }
 
     // admin controller - starts
     public function list($type='page')
