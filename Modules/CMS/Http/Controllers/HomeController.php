@@ -15,14 +15,15 @@ class HomeController extends Controller
      */
     public function index(Page $page)
     {
-        Theme::uses('arsha');
+        // Theme::uses('arsha');
         Theme::setTitle($page->title);
         return Theme::view('cms::frontend.page', $page);
     }
 
     public function home()
     {
-        Theme::uses('arsha');
+        // return get_value('app_theme');
+        // Theme::uses('arsha');
         Theme::setTitle('Swapnil | Home')->set('IsHome',true);
         return Theme::view('cms::frontend.index');
     }

@@ -1,5 +1,8 @@
 <?php
-    function get_message($msg){
+
+use Modules\Settings\Entities\Setting;
+
+function get_message($msg){
         return $msg;
     }
 
@@ -87,4 +90,14 @@
         return $output;
     }
 
+
+
+    function get_value($key){
+        $sett = new Setting();
+        return $sett->where('key',$key)->first()->value;
+    }
+
+    function get_type($type){
+        return Setting::where('type',$type)->get();
+    }
 

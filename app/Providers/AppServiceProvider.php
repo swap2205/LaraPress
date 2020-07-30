@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        config(['theme.themeDefault'=>get_value('app_theme')]);
     }
 }

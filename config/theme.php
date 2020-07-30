@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'themeDefault' => env('APP_THEME', 'arsha'),//get_value('app_theme'),
+	'themeDefault' => env('APP_THEME', 'default'),//get_value('app_theme'),
 
 	/*
 	|--------------------------------------------------------------------------
