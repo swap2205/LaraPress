@@ -23,3 +23,5 @@ Route::prefix('/app/settings')->group(function() {
     Route::post('/admin_nav/{nav}', 'SettingsController@update_admin_nav')->middleware('auth:admin');
 
 });
+
+Route::get('/app/themes', 'SettingsController@themes')->middleware('auth:admin');

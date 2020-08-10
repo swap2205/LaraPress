@@ -47,7 +47,9 @@ return array(
 				$asset->themePath()->add('datables-js-2', 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js');
 				$asset->themePath()->add('datables-responsive-css', 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css');
 				$asset->themePath()->add('datables-responsive-js', 'plugins/datatables-responsive/js/dataTables.responsive.min.js');
-				$asset->themePath()->add('datables-responsive-js-2', 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js');
+                $asset->themePath()->add('datables-responsive-js-2', 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js');
+                $asset->themePath()->add('script-js', 'js/script.js');
+
 			});
 			$asset->cook('summernote', function($asset)
 			{
@@ -69,6 +71,7 @@ return array(
 												'plugins/icheck-bootstrap/icheck-bootstrap.min.css',
 												'plugins/jqvmap/jqvmap.min.css',
 												'css/adminlte.min.css',
+												'plugins/toastr/toastr.min.css',
 												'plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
 												'plugins/daterangepicker/daterangepicker.css',
 												'plugins/summernote/summernote-bs4.css',
@@ -84,7 +87,7 @@ return array(
 												'plugins/jquery-ui/jquery-ui.min.js',
 												'plugins/bootstrap/js/bootstrap.bundle.min.js',
 												'plugins/moment/moment.min.js',
-												//'plugins/chart.js/Chart.min.js',
+												'plugins/toastr/toastr.min.js',
 												//'plugins/sparklines/sparkline.js',
 												//'plugins/jqvmap/jquery.vmap.min.js',
 												//'plugins/jqvmap/maps/jquery.vmap.usa.js',
@@ -94,9 +97,9 @@ return array(
 												//'plugins/summernote/summernote-bs4.min.js',
 												//'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js',
 												'js/adminlte.js',
-												'js/pages/dashboard.js',
+												// 'js/pages/dashboard.js',
 												'js/demo.js',
-												'js/script.js',
+												// 'js/script.js',
 												//'js',
 											]
 										]

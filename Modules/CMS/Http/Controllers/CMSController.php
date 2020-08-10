@@ -40,11 +40,13 @@ class CMSController extends Controller
         $crud = new LaraCRUDCMS();
         // dd(Page::$form_fields);
 
-        $layout_dir = scandir(public_path('themes\admin\layouts'));
+        $layout_dir = scandir(public_path('themes\\'.config('theme.themeDefault').'\layouts'));
         unset($layout_dir[0],$layout_dir[1]);
         $template = [];
         foreach ($layout_dir as $value) {
-            $template[$value] = ucwords(str_replace('_',' ',substr($value,0,strpos($value,'.'))));
+            // $template[$value] = ucwords(str_replace('_',' ',substr($value,0,strpos($value,'.'))));
+            $val = ucwords(str_replace('_',' ',substr($value,0,strpos($value,'.'))));
+            $template[$val] = $val;
         }
         // dd($template);
         // $layout_dir = dir(public_path().'\themes\admin\layout');

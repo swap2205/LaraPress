@@ -18,6 +18,7 @@ function add_nav(){
     $('#add-nav-card-title').text('Add');
     $('#nav_type').val('add');
     $('#nav_admin_frm')[0].reset();
+    $('.is-invalid').removeClass('is-invalid');
 }
 
 function save_nav_link(item){
@@ -51,7 +52,7 @@ function save_link_db(){
             if (data.status) {
                 save_nav_link(data.nav_data);
                 add_nav();
-                alert("Record Saved Successfully!!");
+                toastr.success('Data has been saved successfully')
             }
         },
         error: function (xhr, status, error) {
@@ -59,6 +60,7 @@ function save_link_db(){
             console.log(status);
             if (xhr.status == 422) {
                 //validation error
+                toastr.error(xhr.responseJSON.message);
                 $.each(xhr.responseJSON.errors, function (key, value) {
                     console.log(key);
                     $('#nav_admin_frm [name="' + key + '"]')
@@ -66,6 +68,9 @@ function save_link_db(){
                         // .next()
                     $('#crud_validate_'+key).show().text(value);
                 });
+            }
+            else{
+                toastr.error("Please try again after sometime!!","Oops!! Error occurred");
             }
         },
     });
@@ -86,9 +91,7 @@ function save_navigation(){
         success: function (data) {
             console.log(data);
             if (data.status) {
-                alert("Record Saved Successfully!!");
-                crud_back();
-                reload_data_table();
+                toastr.success("Admin Navigation sequence has been saved");
             }
         },
         error: function (xhr, status, error) {
@@ -96,6 +99,7 @@ function save_navigation(){
             console.log(status);
             if (xhr.status == 422) {
                 //validation error
+                toastr.error(xhr.responseJSON.message);
                 $.each(xhr.responseJSON.errors, function (key, value) {
                     console.log(key);
                     $('#add_edit_form [name="' + key + '"]')
@@ -103,6 +107,10 @@ function save_navigation(){
                         // .next()
                     $('#crud_validate_'+key).show().text(value);
                 });
+
+            }
+            else{
+                toastr.error("Please try again after sometime!!","Oops!! Error occurred");
             }
         },
     });
@@ -114,7 +122,7 @@ function save_navigation(){
 function edit_nav_link(id){
     $('#nav_type').val('edit');
     $('#add-nav-card-title').text('Edit');
-
+    $('.is-invalid').removeClass('is-invalid');
     console.log(id);
     $('#nav_admin_id').val(id);
     $('#frm_nav_title').val($('#li_nav_link_id_'+id).data('nav-title'));

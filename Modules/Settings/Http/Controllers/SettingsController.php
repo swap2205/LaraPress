@@ -136,6 +136,28 @@ class SettingsController extends Controller
 
     }
 
+    public function themes(){
+        $data = [];
+
+        $layout_dir = scandir(public_path('themes'));
+        unset($layout_dir[0],$layout_dir[1]);
+        $template = [];
+        foreach ($layout_dir as $value) {
+            $template[$value] = ucwords(preg_replace('/[^A-Za-z0-9]/',' ',$value));
+        }
+        unset($template['admin']);
+        $data['themes'] = $template;
+
+
+        $this->theme->asset()->themePath()->add('settings-js','js/settings.js');
+
+        $this->theme->setTitle('Themes');
+        return $this->theme->view('settings::themes',$data);
+    }
+
+    public function save_theme(){
+
+    }
     /**
      * Show the specified resource.
      * @param int $id
