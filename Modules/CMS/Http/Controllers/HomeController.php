@@ -19,8 +19,8 @@ class HomeController extends Controller
     {
         $page = PageType::where('slug',$slug)->first();
         // return($page);
-        Theme::setTitle($page->title);
         if(!empty($page)){
+            Theme::setTitle($page->title);
             $pages = Page::where('page_type',$slug)->paginate(3);
             if(request()->ajax()){
                 // return($pages);
@@ -31,6 +31,8 @@ class HomeController extends Controller
             Theme::asset()->add('paginate','js/paginate.js',['scripts']);
             return Theme::view(['view'=>'cms::frontend.page_type','args'=>['pages'=>$pages]]);
         }
+        $page = Page::where('slug',$slug)->first();
+        Theme::setTitle($page->title);
         Theme::set('featured_image',$page->featured_image);
         $layout = file_exists(public_path('themes'.DIRECTORY_SEPARATOR.config('theme.themeDefault').DIRECTORY_SEPARATOR.'layouts'.DIRECTORY_SEPARATOR.$page->template_name.'.blade.php')) ? $page->template_name : 'layout';
         // return(public_path('themes\\'.config('theme.themeDefault').'\layouts\\'.$page->template_name.'.blade.php'));
