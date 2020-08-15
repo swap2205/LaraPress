@@ -3,7 +3,7 @@
     "alias": "cms",
     "description": "",
     "keywords": [],
-    "order": 0,
+    "order": 1000,
     "providers": [
         "Modules\\CMS\\Providers\\CMSServiceProvider"
     ],

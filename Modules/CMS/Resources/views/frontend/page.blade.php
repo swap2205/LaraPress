@@ -17,7 +17,7 @@
       <div class="portfolio-description">
         <h2>{{$title}}</h2>
         <p>
-            {{$content}}
+            {!!$content!!}
         </p>
       </div>
 

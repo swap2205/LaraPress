@@ -21,9 +21,9 @@ class HomeController extends Controller
         // return($page);
         if(!empty($page)){
             Theme::setTitle($page->title);
-            $pages = Page::where('page_type',$slug)->paginate(3);
+            $pages = Page::where('page_type',$slug)->paginate(2);
+            // return($pages);
             if(request()->ajax()){
-                // return($pages);
                 $res['data'] = (string)View::make('cms::frontend.page_type_ajax',['pages'=>$pages]);
                 $res['paging'] = (string)$pages->links();
                 return $res;
@@ -31,7 +31,7 @@ class HomeController extends Controller
             Theme::asset()->add('paginate','js/paginate.js',['scripts']);
             return Theme::view(['view'=>'cms::frontend.page_type','args'=>['pages'=>$pages]]);
         }
-        $page = Page::where('slug',$slug)->first();
+        $page = Page::where('slug',$slug)->firstOrFail();
         Theme::setTitle($page->title);
         Theme::set('featured_image',$page->featured_image);
         $layout = file_exists(public_path('themes'.DIRECTORY_SEPARATOR.config('theme.themeDefault').DIRECTORY_SEPARATOR.'layouts'.DIRECTORY_SEPARATOR.$page->template_name.'.blade.php')) ? $page->template_name : 'layout';
@@ -45,5 +45,4 @@ class HomeController extends Controller
         Theme::setTitle('Swapnil | Home')->set('IsHome',true);
         return Theme::view('cms::frontend.index');
     }
-
 }
