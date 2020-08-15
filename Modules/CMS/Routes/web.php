@@ -39,6 +39,6 @@ if(empty(request()->segment(2))){
     //condition to check if the route does not belong to any module
     if(!in_array(request()->segment(1),Module::all())){
         // Route::get('/{course:slug}', 'PageController@course');
-        Route::get('/{page:slug}', 'HomeController@index');
+        Route::get('/{slug}', 'HomeController@index');
     }
 }
