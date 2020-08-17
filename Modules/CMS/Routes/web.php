@@ -34,6 +34,7 @@ Route::prefix('admin/page_type')->group(function() {
 });
 
 Route::get('/swap','CMSController@create');
+Route::get('/admin/file-manager','FileManagerController@index');
 
 if(empty(request()->segment(2))){
     //condition to check if the route does not belong to any module

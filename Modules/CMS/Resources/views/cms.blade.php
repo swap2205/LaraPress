@@ -15,6 +15,8 @@
 {{-- [optional] On page - Scripts section  --}}
 @section('cms_script')
 <script>
+    
+    
     $(document).ready(function(){
         // add extra code here
     });
@@ -45,6 +47,51 @@
             $('#crud_view_featured_image').html("<img src='"+data.featured_image+"' class='img-thumbnail'>");
         }
     }
+
+    //file manager integration in summernote editor
+    $(document).ready(function(){
+    // File manager button (image icon)
+    const FMButton = function(context) {
+      const ui = $.summernote.ui;
+      const button = ui.button({
+        contents: '<i class="note-icon-picture"></i> ',
+        tooltip: 'File Manager',
+        click: function() {
+          window.open('/file-manager/summernote', 'fm', 'width=1400,height=800');
+        }
+      });
+      console.log(button);
+      return button.render();
+    };
+    $('.sn_textarea').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['fm-button', ['fm']],
+        ['view', ['fullscreen', 'codeview']],
+      ],
+      buttons: {
+        fm: FMButton
+      }
+    });
+  });
+  // set file link
+  function fmSetLink(url) {
+    var file_ext = url.substring(url.lastIndexOf('.')+1);
+    var embed_files = ['pdf','mp4'];
+    if(embed_files.indexOf(file_ext)>-1){
+	    var HTMLstring = '<iframe src="'+url+'" height="200" width="300"></iframe>';
+	    $('.sn_textarea').summernote('pasteHTML', HTMLstring);
+	}
+	else{	
+    	$('.sn_textarea').summernote('insertImage', url);
+    }
+  }
 </script>
 
 @endsection
