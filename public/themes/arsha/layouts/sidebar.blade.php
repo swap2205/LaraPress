@@ -39,21 +39,9 @@
                     @content()
                 </div>
                 <div class="col-md-2">
-                    <section class="card">
-                        <div class="card-header">
-                            <h3>Latest Post</h3>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#">Cras justo odio</a> </li>
-                                <li class="list-group-item"><a href="#">Cras justo odio</a> </li>
-                                <li class="list-group-item"><a href="#">Cras justo odio</a> </li>
-                                <li class="list-group-item"><a href="#">Cras justo odio</a> </li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
-                    </section>
+                    @if (Theme::get('page_type', null))
+                        @widget('CMS\Widgets\Demo', ['label' => Theme::get('page_type', null), 'count'=>5])
+                    @endif
                 </div>
             </div>
         </div>

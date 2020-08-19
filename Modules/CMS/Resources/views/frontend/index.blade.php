@@ -27,7 +27,7 @@
 
 
         <div class="row" data-aos="zoom-in">
-          @widget('CMS\Widgets\Demo', ['label' => 'blog', 'count'=>3])
+          {{-- @widget('CMS\Widgets\Demo', ['label' => 'news', 'count'=>2]) --}}
         </div>
       </div>
     </section>
