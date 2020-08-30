@@ -52,7 +52,7 @@ $(document).ready(function() {
         btn.attr('disabled',true);
 
         $.ajax({
-            url: base_url+'/app/settings/',
+            url: base_url+'/app/settings',
             type: 'POST',
             data: formData,
             contentType: false,
