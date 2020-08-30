@@ -36,6 +36,9 @@ Route::prefix('admin/page_type')->group(function() {
 Route::get('/swap','CMSController@create');
 Route::get('/admin/file-manager','FileManagerController@index');
 
+Route::get('/contact','HomeController@contact');
+Route::post('/contact','HomeController@send_email');
+
 if(empty(request()->segment(2))){
     //condition to check if the route does not belong to any module
     if(!in_array(request()->segment(1),Module::all())){

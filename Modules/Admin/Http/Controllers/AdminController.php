@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Admin;
-use Modules\Auth\MyTraits\GetDatatables;
+use Swap2205\LaraCRUD\LaraCRUDCMS;
 use Theme;
 
 class AdminController extends Controller
 {
-    use GetDatatables;
+    // use GetDatatables;
 
     public function __construct()
     {
@@ -22,12 +22,17 @@ class AdminController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index($type='')
+    public function index(LaraCRUDCMS $crud)
     {
         $this->theme->setTitle('Admin Users')
                     ->asset()->serve('datatables');
 
-        return $this->theme->of('admin::index')->render();
+        $data = $crud->initList(Admin::class)->setPageTitle("Users")->getViewData();
+
+        $data['datatable_url'] = '/admin/users/list';
+        $data['form_submit_url'] = '/admin/users';
+//        return $data;
+        return $this->theme->of('admin::users',$data)->render();
     }
 
     /**
@@ -39,7 +44,17 @@ class AdminController extends Controller
         return view('admin::create');
     }
 
+	
     public function ajax_list(Request $request){
+        $query = Admin::select('id');
+        // $query = $this->get_filters($query);
+        $crud = new LaraCRUDCMS();
+        $result = $crud->initDatatable(Admin::class)->getDataTable($query);
+
+        return $result;
+    }
+
+/*    public function ajax_list(Request $request){
         // dd($request);
         $columns = ['email', 'name'];
         //return $columns;
@@ -81,7 +96,7 @@ class AdminController extends Controller
         }
         return $query;
     }
-
+*/ 
     public function store(Request $request)
     {
         $data = $request->validate([

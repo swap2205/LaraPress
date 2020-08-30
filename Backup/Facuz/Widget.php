@@ -68,7 +68,7 @@ abstract class Widget {
      *
      * @var string
      */
-    public $path = '';
+    public $path = 'widgets';
 
 
     /**
@@ -212,6 +212,9 @@ abstract class Widget {
         // If not found in theme widgets directory, try to watch in views/widgets again.
         if($this->watch === true and ! $this->view->exists($path)){
             $path = $this->template;
+            if(!$this->view->exists($path)){
+                $path = $this->path.'.'.$this->template;
+            }
         }
 
         // Error file not exists.

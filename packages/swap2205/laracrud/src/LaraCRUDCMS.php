@@ -203,7 +203,7 @@ class LaraCRUDCMS{
     {
         foreach ($this->getFilterColumns() as $key => $value) {
             # code...
-            if(request()->input($key)){
+            if(request()->input($key)!=''){
                 $query = $query->where($key,request()->input($key));
             }
         }

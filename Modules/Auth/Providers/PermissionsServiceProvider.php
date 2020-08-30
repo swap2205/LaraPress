@@ -29,6 +29,7 @@ class PermissionsServiceProvider extends ServiceProvider
     {
         try {
             AdminPermission::get()->map(function ($permission){
+            // dd($permission);
                 Gate::define($permission->slug, function($user) use ($permission){
                     return $user->hasPermissionTo($permission);
                 });

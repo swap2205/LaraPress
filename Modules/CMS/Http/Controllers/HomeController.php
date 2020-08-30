@@ -5,6 +5,7 @@ namespace Modules\CMS\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Modules\CMS\Entities\Page;
 use Modules\CMS\Entities\PageType;
@@ -47,5 +48,30 @@ class HomeController extends Controller
     {
         Theme::setTitle('Swapnil | Home')->set('IsHome',true);
         return Theme::view('cms::frontend.index');
+    }
+
+    public function contact(){
+        Theme::setTitle('Contact Us')->set('IsHome',false);
+        return Theme::view('cms::frontend.contact');
+    }
+
+    public function send_email(Request $req)
+    {
+        $req->validate(['email' => "required|email:rfc,dns"]);
+        $data = [
+            "user" => "swapnil",
+            "title" => "Hey!! Welcome to LaraPress!!",
+            "msg" => "Thanks for subscribing with LaraPress!!",
+        ];
+        Mail::send('cms::emails.email1', $data, function ($message) {
+            // $message->from('john@johndoe.com', 'John Doe');
+            // $message->sender('john@johndoe.com', 'John Doe');
+            $message->to('john@johndoe.com', 'John Doe');
+            $message->cc('john@johndoe.com', 'John Doe');
+            $message->bcc('john@johndoe.com', 'John Doe');
+            $message->replyTo('john@johndoe.com', 'John Doe');
+            $message->subject('Welcome to LaraPress!!');
+        });
+        return redirect('/contact')->with('message','Email Sent');
     }
 }

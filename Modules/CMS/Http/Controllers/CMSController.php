@@ -35,9 +35,9 @@ class CMSController extends Controller
 
 
     // admin controller - starts
-    public function list($type='page')
+    public function list($type='page', LaraCRUDCMS $crud)
     {
-        $crud = new LaraCRUDCMS();
+        // $crud = new LaraCRUDCMS();
         // dd(Page::$form_fields);
 
         $layout_dir = scandir(public_path('themes'.DIRECTORY_SEPARATOR.config('theme.themeDefault').DIRECTORY_SEPARATOR.'layouts'));
@@ -216,11 +216,11 @@ class CMSController extends Controller
         //
     }
 
-    public function ajax_list(Request $request){
+    public function ajax_list(LaraCRUDCMS $crud){
         $query = Page::select('id');
         // $query = $this->get_filters($query);
         $query = $query->with('pageType');
-        $crud = new LaraCRUDCMS();
+        // $crud = new LaraCRUDCMS();
         $result = $crud->initDatatable(Page::class)->getDataTable($query);
 
         return $result;
