@@ -1,6 +1,6 @@
 <div class="login-box">
     <div class="login-logo">
-      <a href="{{url('/')}}"><b>Admin</b>LTE</a>
+      <a href="{{url('/')}}"><b>Lara</b>Press</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -30,7 +30,7 @@
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-                <input type="checkbox" id="remember">
+                <input type="checkbox" id="remember" name="remember" value="1">
                 <label for="remember">
                   Remember Me
                 </label>
@@ -43,7 +43,7 @@
             <!-- /.col -->
           </div>
         </form>
-
+{{-- 
         <div class="social-auth-links text-center mb-3">
           <p>- OR -</p>
           <a href="#" class="btn btn-block btn-primary">
@@ -53,14 +53,14 @@
             <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
           </a>
         </div>
-        <!-- /.social-auth-links -->
+        <!-- /.social-auth-links --> --}}
 
-        <p class="mb-1">
+        <p class="mt-2 text-center">
           <a href="forgot-password.html">I forgot my password</a>
         </p>
-        <p class="mb-0">
+        {{-- <p class="mb-0">
           <a href="register.html" class="text-center">Register a new membership</a>
-        </p>
+        </p> --}}
       </div>
       <!-- /.login-card-body -->
     </div>

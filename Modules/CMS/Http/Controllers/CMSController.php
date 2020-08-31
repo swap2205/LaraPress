@@ -2,6 +2,7 @@
 
 namespace Modules\CMS\Http\Controllers;
 
+use App\Http\Controllers\Controller as ControllersController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -15,7 +16,7 @@ use Swap2205\LaraCRUD\LaraCRUD;
 use Swap2205\LaraCRUD\LaraCRUDCMS;
 use Swap2205\LaraCRUD\LaraForm;
 
-class CMSController extends Controller
+class CMSController extends ControllersController
 {
 
     /**
@@ -37,6 +38,7 @@ class CMSController extends Controller
     // admin controller - starts
     public function list($type='page', LaraCRUDCMS $crud)
     {
+        // $this->authorize('delete-users',Page::class);
         // $crud = new LaraCRUDCMS();
         // dd(Page::$form_fields);
 

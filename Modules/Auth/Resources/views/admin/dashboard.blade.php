@@ -4,11 +4,8 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Dashboard</h1>
-            @role('developer')
-            <small>{{get_message('Hi Developer')}}</small>
-            @endrole
-            @role('manager')
-            <small>Hi Manager</small>
+            @role('admin','manager')
+            <small>{{get_message('Hi Admin, Welcome to LaraPress!!')}}</small>
             @endrole
           </div><!-- /.col -->
           <div class="col-sm-6">

@@ -48,10 +48,10 @@ class AdminAuthController extends Controller
             'email'=>['required','email:rfc,dns'],
             'password' => ['required','min:6','max:20']
         ]);
+        $remember = request()->remember ?? false;
 
 
-
-        if(Auth::guard('admin')->attempt($cred)){
+        if(Auth::guard('admin')->attempt($cred,$remember)){
             return redirect()->intended('/admin/dashboard');
         }
         else{
