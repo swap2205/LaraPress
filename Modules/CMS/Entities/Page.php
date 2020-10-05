@@ -69,3 +69,10 @@ class Page extends Model
         return $this->hasOne(PageType::class,'slug','page_type');
     }
 }
+
+
+
+
+
+
+

@@ -107,6 +107,7 @@ function crud_edit(id) {
         },
         error: function (xhr, status, error) {
             console.log(xhr);
+            toastr.error('Error occurred while loading data','Error!!');
         },
     });
 }
@@ -140,6 +141,7 @@ function crud_view(id) {
         },
         error: function (xhr, status, error) {
             console.log(xhr);
+            toastr.error('Error occurred while loading data','Error!!');
         },
     });
 }
@@ -168,7 +170,7 @@ function crud_save() {
         success: function (data) {
             console.log(data);
             if (data.status) {
-                alert("Record Inserted Successfully!!");
+                toastr.success('Data has been saved successfully')
                 crud_back();
                 reload_data_table();
             }
@@ -177,6 +179,7 @@ function crud_save() {
             console.log(xhr);
             console.log(status);
             if (xhr.status == 422) {
+                toastr.warning('Please correct the data in higlighted fields');
                 //validation error
                 $.each(xhr.responseJSON.errors, function (key, value) {
                     console.log(key);
@@ -185,6 +188,7 @@ function crud_save() {
                         // .next()
                     $('#crud_validate_'+key).show().text(value);
                 });
+
             }
         },
     });

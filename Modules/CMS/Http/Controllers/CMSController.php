@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as ControllersController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Modules\CMS\Entities\Page;
@@ -138,6 +139,9 @@ class CMSController extends ControllersController
             $data['featured_image'] = $request->file('featured_image')->store('images','public');
         }
         $cms = Page::create($data);
+        
+        //create event later
+        Redis::incr('pages:count');
         return [
             'status' => 1,
             'cms'=>$cms

@@ -36,12 +36,12 @@ function save_nav_link(item){
 }
 function save_link_db(){
     //ajax
-    const type = $('#nav_type').val()=='edit' ? $('#nav_admin_id').val() : '';
+    const type = $('#nav_type').val()=='edit' ? '/'+$('#nav_admin_id').val() : '';
 
     var formData = new FormData($('#nav_admin_frm')[0]);
     // ajax adding data to database
     $.ajax({
-        url: base_url+'/app/settings/admin_nav/'+type,
+        url: base_url+'/app/settings/admin_nav'+type,
         type: 'POST',
         data: formData,
         contentType: false,

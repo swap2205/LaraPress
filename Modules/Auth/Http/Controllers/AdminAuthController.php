@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
+use Modules\Admin\Entities\Admin;
 use Modules\Auth\Entities\AdminAuth;
 use Modules\Auth\Entities\AdminPermission;
 use Modules\Auth\Entities\AdminRole;
+use Modules\CMS\Entities\Page;
 use Swap2205\LaraCRUD\GetDatatables;
 use Theme;
 
@@ -63,16 +66,32 @@ class AdminAuthController extends Controller
     public function getDashboard(){
         $user = auth('admin')->user();
 
+        $pages_count = Redis::get('pages:count');
+        if(!$pages_count){
+            $pages_count = Page::count();
+            Redis::set('pages:count',$pages_count);
+        }
+        
+        $users_count = Redis::get('users:count');
+        if(!$users_count){
+            $users_count = Admin::count();
+            Redis::set('users:count',$users_count);
+        }
+        
         // to check the role
         // dd($user->hasRole('admin','moderator','developer'));
 
         // to check the permission
         // dd($user->can('edit-users'));
 
+        $data = array(
+                'pages_count'=>$pages_count,
+                'users_count'=>$users_count
+            );
         // return ($user->roles);
         $this->theme->setTitle('LMS Dashboard');
         // $this->theme->asset()->serve('datatables');
-        return $this->theme->of('auth::admin.dashboard')->render();
+        return $this->theme->of('auth::admin.dashboard',$data)->render();
     }
 
     public function list($type=''){

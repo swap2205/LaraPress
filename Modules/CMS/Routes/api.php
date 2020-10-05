@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/cms', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/cms', function (Request $request) {
+//     return ['status'=>true];
+// });
+
+Route::get('/cms', function (Request $request) {
+    return ['status'=>true];
 });
+Route::post('/login', 'Api\PageController@login');
+
+Route::middleware('auth:api')->get('/user', 'Api\PageController@create');
+
+Route::post('/user', 'Api\PageController@store');
+
+// Route::middleware('auth:api')->get('/{slug}', 'Api\PageController@index');
+
+Route::get('/{slug}', 'Api\PageController@index');

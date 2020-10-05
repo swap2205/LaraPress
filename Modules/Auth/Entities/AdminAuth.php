@@ -5,13 +5,14 @@ namespace Modules\Auth\Entities;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Modules\Auth\MyTraits\HasPermissionTrait;
 
 class AdminAuth extends Authenticatable
 {
     use Notifiable;
     protected $table = 'admin_users';
-    use HasPermissionTrait;
+    use HasPermissionTrait, HasApiTokens;
 
     protected $guard = 'admin';
 

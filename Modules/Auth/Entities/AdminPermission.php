@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminPermission extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['name','slug'];
 
     protected $table = 'admin_permissions';
 
@@ -17,4 +17,33 @@ class AdminPermission extends Model
     public function users(){
         return $this->belongsToMany(AdminAuth::class,'admin_users_permissions','user_id','permission_id');
     }
+
+    public static $form_fields = [
+        ['name'=>'name','label'=>'Permission Name','element'=>'input', 'type'=>'text'],
+        ['name'=>'slug','label'=>'Slug','element'=>'input', 'type'=>'text'],
+    ];
+
+    public static $dataTable_columns = [
+        'name'=>'Permission Name',
+        'slug'=>'Slug',
+        'created_at'=>'Created Date',
+    ];
+
+    public static $dataSelect_columns = [
+        'name'=>'Permission Name',
+        'slug'=>'Slug',
+        'created_at'=>'Created Date',
+    ];
+
+    public static $dataTable_filters = [
+        'name'=>['name'=>'name','label'=>'Permission Name','element'=>'input', 'type'=>'text'],
+        'slug'=>['name'=>'slug','label'=>'Slug','element'=>'input', 'type'=>'text'],
+    ];
+
+    public static $dataTable_action = [
+        'view'=>'View',
+        'edit'=>'Edit',
+        'delete'=>'Delete',
+        'add'=>'Add',
+    ];
 }
