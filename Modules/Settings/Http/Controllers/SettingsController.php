@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
+use Modules\Auth\Entities\AdminRole;
 use Modules\Settings\Entities\AdminNavigation;
 use Modules\Settings\Entities\Setting;
 use Theme;
@@ -56,9 +57,15 @@ class SettingsController extends Controller
                 $data['navs'][$nval['parent_id']]['children'][] = $nval;
             }
         }
+
+        $data['roles'] = AdminRole::select('id','name')->orderBy('name')->get();
         // return($data);
         $this->theme->asset()->add('nestable-css','//cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.css');
         $this->theme->asset()->add('nestable-js','//cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js');
+        
+        $this->theme->asset()->themePath()->add('select2-css','plugins/select2/css/select2.min.css');
+        $this->theme->asset()->themePath()->add('select2-js','plugins/select2/js/select2.full.min.js');
+
         $this->theme->asset()->themePath()->add('settings-js','js/admin_nav.js');
         return $this->theme->setTitle('Admin Navigation')->view('settings::admin_nav',$data);
     }
@@ -82,13 +89,21 @@ class SettingsController extends Controller
 
         return ['status'=>(boolean)$sett];
     }
+
+    public function get_nav_by_id(AdminNavigation $nav){
+        return $nav;
+    }
+
     public function store_admin_nav(Request $request)
     {
         $data = $request->validate([
             'title' => 'required',
             'uri' => 'required',
             'icon_class' => 'required',
+            'nav_roles' => 'required',
         ]);
+        $data['roles_allowed'] = json_encode($data['nav_roles']);
+        unset($data['nav_roles']);
         $data['status'] = $request->input('nav_status') ?? 0;
         // dd($data);
         $nav = AdminNavigation::create($data);
@@ -106,14 +121,17 @@ class SettingsController extends Controller
             'title' => 'required',
             'uri' => 'required',
             'icon_class' => 'required',
+            'nav_roles' => 'required',
         ]);
+        $data['roles_allowed'] = json_encode($data['nav_roles']);
+        // unset($data['nav_roles']);
         $data['status'] = $request->input('nav_status') ?? 0;
-
+        // dd($data);
         $nav->title = $data['title'];
         $nav->uri = $data['uri'];
         $nav->icon_class = $data['icon_class'];
         $nav->status = $data['status'];
-
+        $nav->roles_allowed = json_encode($data['nav_roles']);
         $nav->save();
 
         return ['status'=>true,'nav_data' => $nav];
@@ -173,9 +191,10 @@ class SettingsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit()
     {
-        return view('settings::edit');
+        // return view('settings::edit');
+        return AdminNavigation::all();
     }
 
     /**
@@ -258,8 +277,11 @@ class SettingsController extends Controller
         $data = [];
 
         // $data['navs'] =[];
-        $navs = json_decode(AdminNavigation::where('status',1)->orderBy('nav_order')->get(),1);
-
+        $navs = json_decode(AdminNavigation::where('status',1)
+            ->whereJsonContains('roles_allowed',"3")
+            ->orderBy('nav_order')
+            ->get(),1);
+        // dd($navs);
         // return($navs);
         foreach ($navs as $nk => $nval) {
             if($nval['parent_id']==0){

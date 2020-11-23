@@ -202,6 +202,20 @@
                                 {{-- </div> --}}
                                 {{-- <div class="col-sm-6"> --}}
                                     <div class="form-group row">
+                                        <label for="frm_nav_roles" class="col-sm-3 col-form-label">Roles</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control select2" style="width: 100%;" id="frm_nav_roles"
+                                                 name="nav_roles[]" multiple>
+                                                 <option value="0">All</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                                @endforeach
+                                                </select>
+                                        </div>
+                                    </div>
+                                {{-- </div> --}}
+                                {{-- <div class="col-sm-6"> --}}
+                                    <div class="form-group row">
                                         <label for="frm_nav_icon" class="col-sm-3 col-form-label">Icon Class</label>
                                         <div class="col-sm-9">
                                             <input type="text" maxlength="100" class="form-control" id="frm_nav_icon"
@@ -229,9 +243,9 @@
                                         <label for="exampleCheck2" class="col-sm-3 col-form-label">Status</label>
                                         <div class="col-sm-9">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck2"
+                                                <input type="checkbox" class="form-check-input" id="frm_nav_status"
                                                     name="nav_status" value="1">
-                                                <label class="form-check-label" for="exampleCheck2">Enabled</label>
+                                                <label class="form-check-label" for="frm_nav_status">Enabled</label>
                                             </div>
                                         </div>
                                     {{-- </div>

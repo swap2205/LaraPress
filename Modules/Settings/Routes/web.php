@@ -21,7 +21,8 @@ Route::prefix('/app/settings')->group(function() {
     Route::post('/admin_nav', 'SettingsController@store_admin_nav')->middleware('auth:admin');
     Route::post('/admin_nav/update_order', 'SettingsController@update_admin_nav_order')->middleware('auth:admin');
     Route::post('/admin_nav/{nav}', 'SettingsController@update_admin_nav')->middleware('auth:admin');
-
+    Route::get('/admin_nav/{nav}', 'SettingsController@get_nav_by_id')->middleware('auth:admin');
+    
 });
-
+Route::get('/app/array', 'SettingsController@edit');
 Route::get('/app/themes', 'SettingsController@themes')->middleware('auth:admin');

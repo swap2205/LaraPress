@@ -4,7 +4,10 @@ var list_id = 1;
 
 $(document).ready(()=>{
     $('.dd').nestable({ "maxDepth" : 2 });
-
+    $('.select2').select2({
+        placeholder: 'Select a role',
+        allowClear: true
+    });
 
     // Toggle plus minus icon on show hide of collapse element
     $(".collapse").on('show.bs.collapse', function(){
@@ -12,12 +15,24 @@ $(document).ready(()=>{
     }).on('hide.bs.collapse', function(){
         $(this).prev(".card-header").find(".fa").removeClass("fa-minus").addClass("fa-plus");
     });
+
+    $('#frm_nav_roles').on('change',function () {
+        if($(this).val()[0]=='0'){
+            $('#frm_nav_roles>option').prop('selected',1);
+            $('#frm_nav_roles>option:first-child').prop('selected',0);
+            $('#frm_nav_roles').trigger('change');
+        }
+    });
 });
 
 function add_nav(){
     $('#add-nav-card-title').text('Add');
     $('#nav_type').val('add');
     $('#nav_admin_frm')[0].reset();
+    
+    $('#frm_nav_roles').val([]);
+    $('#frm_nav_roles').trigger('change');
+    
     $('.is-invalid').removeClass('is-invalid');
 }
 
@@ -124,11 +139,31 @@ function edit_nav_link(id){
     $('#add-nav-card-title').text('Edit');
     $('.is-invalid').removeClass('is-invalid');
     console.log(id);
-    $('#nav_admin_id').val(id);
-    $('#frm_nav_title').val($('#li_nav_link_id_'+id).data('nav-title'));
-    $('#frm_nav_icon').val($('#li_nav_link_id_'+id).data('nav-icon'));
-    $('#frm_nav_uri').val($('#li_nav_link_id_'+id).data('nav-uri'));
+    get_admin_nav(id);
 }
+
+function get_admin_nav(id){
+    $.ajax({
+        url: '/app/settings/admin_nav/'+id,
+        type: 'GET',
+        dataType: "JSON",
+        success: function (data) {
+            console.log(data);
+            $('#nav_admin_id').val(id);
+            $('#frm_nav_title').val(data.title);
+            $('#frm_nav_icon').val(data.icon_class);
+            $('#frm_nav_uri').val(data.uri);
+
+            $('#frm_nav_roles').val(JSON.parse(data.roles_allowed));
+            $('#frm_nav_roles').trigger('change');
+            $('#frm_nav_status').prop('checked',data.status)
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Please try again after sometime!!","Oops!! Error occurred");
+        },
+    });
+}
+
 function build_item(data){
     console.log(data);
     var html = '';
